@@ -1,0 +1,41 @@
+server:
+  port: 8080
+
+spring:
+  main:
+    web-application-type: reactive
+  application:
+    name: soa-gateway
+  profiles:
+    default: prod
+  cloud:
+    gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins:
+              - "*"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowedHeaders:
+              - "*"
+      routes:
+        - id: back
+          uri:
+            http://localhost
+          predicates:
+            - Path=/back/**
+
+
+
+logging:
+  level:
+    root: debug
+
+
+
+
